@@ -35,3 +35,32 @@ let epsilonRate = parseInt(gammaCount(inputArray).reduce(epsilonCounterReducer, 
 console.log('gamma rate is: ', gammaRate)
 console.log('epsilon rate is: ', epsilonRate)
 console.log('Power consumption is: ', epsilonRate * gammaRate)
+
+let positionCounter = (counter, curr) => curr === '1' ? counter + 1 : counter - 1
+
+let getBitCriteriaOxygen = (array, pos) => array
+  .map(e => e[ pos ])
+  .reduce(positionCounter, 0) >= 0 ? '1' : '0'
+
+let getBitCriteriaCO2 = (array, pos) => array
+  .map(e => e[ pos ])
+  .reduce(positionCounter, 0) >= 0 ? '0' : '1'
+
+let oxygenArray = [ ...inputArray ]
+for (let pos = 0; oxygenArray.length > 1; pos++) {
+  let criteria = getBitCriteriaOxygen(oxygenArray, pos)
+  oxygenArray = oxygenArray.filter(e => e[ pos ] === criteria)
+}
+
+let co2Array = [ ...inputArray ]
+for (let pos = 0; co2Array.length > 1; pos++) {
+  let criteria = getBitCriteriaCO2(co2Array, pos)
+  co2Array = co2Array.filter(e => e[ pos ] === criteria)
+}
+
+let oxygenRating = parseInt(oxygenArray[ 0 ], 2)
+let co2Rating = parseInt(co2Array[ 0 ], 2)
+
+console.log(`Oxygen generator rating is ${oxygenRating}`)
+console.log(`CO2 scrubber rating is ${co2Rating}`)
+console.log(`Life support rating is ${co2Rating * oxygenRating}`)
