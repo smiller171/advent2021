@@ -17,6 +17,7 @@ let getSlidingWindows = array => array
   .slice(0, -3)
 
 let slidingArray = getSlidingWindows(inputArray)
+
 console.log(
   slidingArray.reduce(countDepthIncreases, 0)
 )
