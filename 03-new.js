@@ -33,7 +33,7 @@ class Data {
       let workingArray = [ ...array2d ]
       for (let pos = 0; workingArray.length > 1; pos++) {
         let criteria = criteriaGenerator(arrayRotator(workingArray)[ pos ])
-        workingArray = workingArray.filter(e => e[ pos ] === criteria)
+        workingArray = this.filterByCriteria(workingArray, criteria, pos)
       }
       return workingArray[ 0 ].join('')
     }
