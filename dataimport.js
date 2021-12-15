@@ -6,6 +6,9 @@ class Data {
       .toString()
       .trimEnd()
       .split('\n')
+    if (this.inputArray.length === 1) {
+      this.inputArray = this.inputArray[ 0 ].split(',')
+    }
   }
 }
 
